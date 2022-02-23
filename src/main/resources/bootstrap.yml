@@ -1,10 +1,33 @@
 spring:
   application:
-    name: service-saving-account
+    name: service-savingaccount
 
+  #CONFIG SERVER FETCH GIT
   cloud:
     config:
-      uri: http://localhost:8888
+      #enabled: true
+      discovery:
+        enabled: true
+        service-id: config-server
+      name: service-savingaccount
+      profile: dev
+      uri: ${REMOTE_REPOSITORY:http://localhost:8888}
+      #uri: http://localhost:8888
       #uri: http://config-server:8888
+      #uri: ${REMOTE_REPOSITORY:http://localhost:8888}
       username: nttdata
       password: qwerty
+      failFast: true
+      retry:
+        max-attempts: 20
+        max-interval: 15000
+        initial-interval: 10000
+        
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
