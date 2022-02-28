@@ -101,7 +101,7 @@ public class SavingAccountServiceImpl implements ISavingAccountService {
   @Override
   public Flux<CreditCard> findCreditCardByCustomer(String id) {
     return reactiveCircuitBreaker.run(webClient.get()
-                                .uri(this.url + "/creditcard/creditcard/find/{id}",id)
+                                .uri(this.url + "/creditcard/find/{id}",id)
                                 .accept(MediaType.APPLICATION_JSON)
                                 .retrieve()
                                 .bodyToFlux(CreditCard.class),
